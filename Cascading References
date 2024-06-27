@@ -1,0 +1,134 @@
+# On Delete Cascade
+
+create database cascading 
+use cascading 
+
+--Table 1
+create table student1
+(StudentId int primary key identity,		---Identity and primary key
+StudentName varchar(50),
+StudentGender varchar(50))
+
+-- table 2
+create table trainer1
+(
+TrainerId int primary key not null,			------Primary key and not null constraints 
+TrainerName varchar(50) , 
+TrainerGender varchar(50)DEFAULT 'Male'  --- Default 
+);
+
+--table 3
+create table StudentTrainer1
+(
+TrainerId int foreign key references Trainer1(TrainerId) on delete cascade ,  -----on delete cascading 
+StdentId int foreign key references Student1(StudentId) on delete cascade     -----on delete cascading 
+);
+
+insert into student1 values('Suraj','Male'),('Ganesh','Male'),('Raj','Male')
+insert into trainer1 values (1,'Ashish','male'),(2,'Vikul','male'),(3,'Yogesh','male'),(4,'Sagar','male')
+insert into StudentTrainer1 values (1,3),(2,2),(3,2),(2,2)
+
+select * from student1
+select* from trainer1
+select * from StudentTrainer1
+
+delete from trainer1 where TrainerId=2
+
+insert into trainer1 values (2,'Vikul','male')
+
+# On Delete Set Null
+
+create database cascading 
+use cascading 
+
+--Table 1
+create table student1
+(StudentId int primary key identity,		---Identity and primary key
+StudentName varchar(50),
+StudentGender varchar(50))
+
+-- table 2
+create table trainer1
+(
+TrainerId int primary key not null,			------Primary key and not null constraints 
+TrainerName varchar(50) , 
+TrainerGender varchar(50)DEFAULT 'Male'  --- Default 
+);
+
+--table 3
+create table StudentTrainer1
+(
+TrainerId int foreign key references Trainer1(TrainerId) on delete set null ,  -----on delete set null
+StdentId int foreign key references Student1(StudentId) on delete set null      -----on delete set null 
+);
+
+insert into student1 values('Suraj','Male'),('Ganesh','Male'),('Raj','Male')
+insert into trainer1 values (1,'Ashish','male'),(2,'Vikul','male'),(3,'Yogesh','male'),(4,'Sagar','male')
+insert into StudentTrainer1 values (1,3),(2,2),(3,2),(2,2)
+
+select * from student1
+select* from trainer1
+select * from StudentTrainer1
+
+delete from trainer1 where TrainerId=1
+
+
+#On Delete Set Default
+
+create database cascading 
+use cascading 
+
+--Table 1
+create table student1
+(StudentId int primary key identity,		---Identity and primary key
+StudentName varchar(50),
+StudentGender varchar(50))
+
+-- table 2
+create table trainer1
+(
+TrainerId int primary key,			------Primary key and not null constraints 
+TrainerName varchar(50) , 
+TrainerGender varchar(50)DEFAULT 'Male'  --- Default 
+);
+
+--table 3
+create table StudentTrainer1
+(
+TrainerId int default 1 foreign key references Trainer1(TrainerId)  on delete set default ,  -----on delete set default
+StdentId int default  1 foreign key references Student1(StudentId)  on delete set default      -----on delete set default 
+);
+
+insert into student1 values('Suraj','Male'),('Ganesh','Male'),('Raj','Male')
+insert into trainer1 values (1,'Ashish','male'),(2,'Vikul','male'),(3,'Yogesh','male'),(4,'Sagar','male')
+insert into StudentTrainer1 values (1,3),(2,2),(3,2),(2,2)
+
+select * from student1
+select* from trainer1
+select * from StudentTrainer1
+
+delete from trainer1 where TrainerId=2
+
+drop table student1
+drop table trainer1
+drop table StudentTrainer1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
