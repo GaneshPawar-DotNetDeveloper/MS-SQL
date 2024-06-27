@@ -1,0 +1,35 @@
+# Constructors 
+create database constructor
+use constructor
+
+--Table 1
+create table student
+(StudentId int primary key identity,		---Identity and primary key
+StudentName varchar(50),
+StudentGender varchar(50),)
+
+-- table 2
+create table trainer
+(
+TrainerId int primary key not null,			------Primary key and not null constraints 
+TrainerName varchar(50) , --- Default 
+TrainerGender varchar(50)DEFAULT 'Male'
+);
+
+--table 3
+create table StudentTrainer
+(
+TrainerId int foreign key references Trainer(TrainerId),  -----Foreign Key 
+StdentId int foreign key references Student(StudentId)
+);
+
+--insert data in table 
+
+insert into student values(1,'Suraj','Male'),(2,'Ganesh','Male'),(3,'Raj','Male')
+insert into trainer(TrainerId,TrainerName) values (1,'Ashish','male'),(2,'Vikul','male'),(3,'Yogesh','male'),(4,'Sagar','male')
+insert into StudentTrainer values (1,3),(2,2),(3,2),(2,2)
+
+select * from student
+select* from trainer
+select * from StudentTrainer
+
